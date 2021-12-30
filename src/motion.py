@@ -22,10 +22,11 @@ def trigger():
     image =  imgur_client.upload_from_path(fileName)
     print("uploaded %s, you can find it here: %s" % (fileName, image['link']))
     
+    fromNumber = '+12695207550'
     message = twilio_client.messages.create(
-        body="Seems like this guy tried to break in to your property.",
-        media_url=[image['link']],
-        from_='+12695207550',
+        body="Seems like this guy has entered your property. %s\nTo set off an alarm, send 'ALARM' to %s" % (image['link'], fromNumber),
+#         media_url=[image['link']],
+        from_=fromNumber,
         to='+886988722815'
     )
     print(message.sid)
